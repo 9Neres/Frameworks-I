@@ -1,0 +1,19 @@
+{
+  "name": "todo-list-backend",
+  "version": "1.0.0",
+  "description": "Backend para sistema de gerenciamento de tarefas",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.4.1",
+    "@fastify/mysql": "^8.0.0",
+    "fastify": "^4.24.3",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+} 
