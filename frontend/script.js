@@ -1,10 +1,10 @@
 const API_URL = 'http://localhost:3000';
 
-// Elementos do DOM
+// Elementos do DOM vsfd raykaaa
+
 const tarefaForm = document.getElementById('tarefaForm');
 const listaTarefas = document.getElementById('listaTarefas');
 
-// Função para carregar as tarefas
 async function carregarTarefas() {
     try {
         const response = await fetch(`${API_URL}/tarefas`);
@@ -73,10 +73,8 @@ async function criarTarefa(event) {
             throw new Error('Erro ao criar tarefa');
         }
         
-        // Limpar o formulário
         tarefaForm.reset();
         
-        // Recarregar a lista de tarefas
         await carregarTarefas();
         
         // Mostrar mensagem de sucesso
@@ -93,9 +91,6 @@ async function criarTarefa(event) {
         alert('Erro ao criar tarefa. Por favor, tente novamente.');
     }
 }
-
-// Event Listeners
 tarefaForm.addEventListener('submit', criarTarefa);
 
-// Carregar tarefas ao iniciar a página
 carregarTarefas(); 
