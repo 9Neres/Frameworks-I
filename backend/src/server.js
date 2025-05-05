@@ -3,29 +3,14 @@ const cors = require('@fastify/cors');
 const mysql = require('@fastify/mysql');
 require('dotenv').config();
 
-// =============================================
-// CONFIGURAÇÃO DO BANCO DE DADOS
-// =============================================
-// 1. Certifique-se de que o MySQL está instalado e rodando
-// 2. Crie o banco de dados e a tabela executando o script em src/database.sql
-// 3. Configure as credenciais no arquivo .env
-// 4. A string de conexão deve seguir o formato:
-//    mysql://usuario:senha@host:porta/nome_do_banco
-
-// Configuração do CORS
 fastify.register(cors, {
   origin: true
 });
 
-// Configuração do MySQL
 fastify.register(mysql, {
   promise: true,
   connectionString: process.env.DATABASE_URL
 });
-
-// =============================================
-// ROTAS DA API
-// =============================================
 
 // Rota de teste
 fastify.get('/', async (request, reply) => {
@@ -37,7 +22,6 @@ fastify.post('/tarefas', async (request, reply) => {
   const { titulo, descricao, status } = request.body;
   
   try {
-    // Obtém uma conexão do pool de conexões
     const connection = await fastify.mysql.getConnection();
     
     // Executa a query de inserção
@@ -63,13 +47,10 @@ fastify.post('/tarefas', async (request, reply) => {
 
 fastify.get('/tarefas', async (request, reply) => {
   try {
-    // Obtém uma conexão do pool de conexões
     const connection = await fastify.mysql.getConnection();
     
-    // Executa a query de seleção
     const [rows] = await connection.execute('SELECT * FROM tarefas');
     
-    // Libera a conexão de volta para o pool
     connection.release();
     
     return rows;
@@ -79,9 +60,8 @@ fastify.get('/tarefas', async (request, reply) => {
   }
 });
 
-// =============================================
 // INICIALIZAÇÃO DO SERVIDOR
-// =============================================
+
 const start = async () => {
   try {
     await fastify.listen({ port: 3000, host: '0.0.0.0' });
